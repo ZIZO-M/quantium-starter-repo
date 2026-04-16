@@ -11,8 +11,8 @@ df = df[df["product"] == "pink morsel"]
 # Calculate sales: strip '$' from price, cast to float, multiply by quantity
 df["sales"] = df["price"].str.replace("$", "", regex=False).astype(float) * df["quantity"]
 
-# Keep only required columns
-df = df[["sales", "date", "region"]]
+# Keep only required columns, sorted by date
+df = df[["sales", "date", "region"]].sort_values("date").reset_index(drop=True)
 
 # Write output
 df.to_csv("output.csv", index=False)
